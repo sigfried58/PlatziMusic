@@ -8,6 +8,7 @@ export default class ArtistBox extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.artist);
 		const { image, name, likes, comments } = this.props.artist;
 
 		return (
