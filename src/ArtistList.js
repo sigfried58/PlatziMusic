@@ -10,11 +10,28 @@ export default class ArtistList extends React.Component {
 		};
 	}
 
+	componentDidMount() {
+		this.updateDataSource(this.props.artists);
+	}
+
+	componentWillReceiveProps(newProps) {
+		if (newProps.artists !== this.props.artists) {
+			this.updateDataSource(newProps.artists);
+		}
+	}
+
+	updateDataSource = data => {
+		this.setState({
+			dataSource: data
+		});
+	};
+
 	render() {
 		return (
 			<FlatList
 				data={this.state.dataSource}
 				renderItem={({ item }) => <ArtistBox artist={item} />}
+				keyExtractor={(item, index) => index}
 			/>
 		);
 	}
