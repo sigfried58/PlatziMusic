@@ -1,36 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import ArtistList from './src/ArtistList';
-import { getArtists } from './src/api-client';
+import { StyleSheet, Text, View, Platform } from 'react-native';
+import { Scene, Router, Stack } from 'react-native-router-flux';
+import HomeView from './src/HomeView';
+import ArtistDetailView from './src/ArtistDetailView';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      artists: []
-    };
-  }
-
-  componentDidMount() {
-    getArtists().then(data => this.setState({ artists: data }));
-  }
-
   render() {
-    const artists = this.state.artists;
-
+    //const isAndroid = Platform.OS === 'android'
     return (
-      <View style={styles.container}>
-        <ArtistList artists={artists} />
-      </View>
+      <Router>
+        <Stack key="root">
+          <Scene key="home" component={HomeView} hideNavBar />
+          <Scene
+            key="artistDetail"
+            component={ArtistDetailView}
+            hideNavBar={false}
+          />
+        </Stack>
+      </Router>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightgray',
-    paddingTop: 50
-  }
-});

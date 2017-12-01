@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import ArtistBox from './ArtistBox';
 
 export default class ArtistList extends React.Component {
@@ -26,11 +27,24 @@ export default class ArtistList extends React.Component {
 		});
 	};
 
+	handlePress(artist) {
+		console.warn('artist', artist);
+		Actions.artistDetail({ artist });
+	}
+
 	render() {
 		return (
 			<FlatList
 				data={this.state.dataSource}
-				renderItem={({ item }) => <ArtistBox artist={item} />}
+				renderItem={({ item }) => {
+					return (
+						<TouchableOpacity
+							onPress={() => this.handlePress(item)}
+						>
+							<ArtistBox artist={item} />
+						</TouchableOpacity>
+					);
+				}}
 				keyExtractor={(item, index) => index}
 			/>
 		);
