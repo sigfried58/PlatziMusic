@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
 import HomeView from './src/HomeView';
+import LoginView from './src/LoginView';
 import ArtistDetailView from './src/ArtistDetailView';
 
 export default class App extends React.Component {
@@ -10,6 +11,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <Stack key="root">
+          <Scene key="login" component={LoginView} hideNavBar />
           <Scene key="home" component={HomeView} hideNavBar />
           <Scene
             key="artistDetail"
@@ -21,4 +23,3 @@ export default class App extends React.Component {
     );
   }
 }
-
